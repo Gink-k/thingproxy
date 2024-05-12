@@ -105,7 +105,13 @@ function processRequest(req, res) {
         if (req.headers["host"]) {
             req.headers["host"] = remoteURL.host;
         }
-        
+        const newUserAgent = req.headers['New-User-Agent'];
+
+        if (newUserAgent) {
+            req.headers['User-Agent'] = newUserAgent;
+        }
+
+
         // Remove origin and referer headers. TODO: This is a bit naughty, we should remove at some point.
         delete req.headers["origin"];
         delete req.headers["referer"];
